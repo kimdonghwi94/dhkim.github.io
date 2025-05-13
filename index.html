@@ -1,16 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <title>김동휘 포트폴리오</title>
-  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    body { font-family: sans-serif; text-align: center; margin-top: 50px; }
+    .menu a { margin: 0 20px; font-size: 18px; text-decoration: none; }
+    .chat-box { margin-top: 40px; }
+  </style>
 </head>
 <body>
-  <h1>안녕하세요, 김동휘입니다</h1>
-  <p>AI 개발자 / 기술 블로그 운영자</p>
-  <nav>
-    <a href="about.html">About</a> |
-    <a href="blog/index.html">Blog</a> |
-    <a href="projects/ai_project_1.html">Projects</a>
-  </nav>
+
+  <h1>김동휘님의 홈페이지에 오신 걸 환영합니다</h1>
+  <p>필요하신 내용을 작성해주세요</p>
+
+  <div class="menu">
+    <a href="portfolio.html">📁 포트폴리오</a>
+    <a href="resume.html">📄 이력서</a>
+    <a href="stack.html">🛠️ 기술스택</a>
+  </div>
+
+  <div class="chat-box">
+    <input type="text" id="question" placeholder="궁금한 내용을 입력하세요" size="50">
+    <button onclick="askChat()">질문하기</button>
+  </div>
+
+  <script>
+    async function askChat() {
+      const q = document.getElementById("question").value;
+      const res = await fetch("https://your-api-url.com/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: q })
+      });
+      const data = await res.json();
+
+      // 예: data = { answer: "이동합니다", url: "/resume.html" }
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        alert(data.answer || "응답이 없습니다.");
+      }
+    }
+  </script>
+
 </body>
 </html>
