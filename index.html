@@ -3,13 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>김동휘 포트폴리오</title>
-  <style>
-    body { font-family: sans-serif; text-align: center; margin-top: 50px; }
-    .menu a { margin: 0 20px; font-size: 18px; text-decoration: none; }
-    .chat-box { margin-top: 40px; }
-    .hidden { opacity: 0; transition: opacity 1s; }
-    .show { opacity: 1; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -24,7 +18,7 @@
   </div>
 
   <div class="chat-box hidden" id="question-box">
-    <input type="text" id="question" placeholder="궁금한 내용을 입력하세요" size="50">
+    <input type="text" id="question" placeholder="궁금한 내용을 입력하세요">
     <button onclick="askChat()">질문하기</button>
   </div>
 
