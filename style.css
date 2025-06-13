@@ -3,8 +3,9 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  padding-top: 10vh;
   background: linear-gradient(120deg, #1e3c72, #2a5298);
   color: #fff;
   font-family: 'Apple SD Gothic Neo', 'NanumGothic', 'Malgun Gothic', sans-serif;
@@ -36,14 +37,30 @@ h1, h2, h3, h4, p {
 
 .chat-box {
   margin-top: 30px;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
 }
-.chat-box input {
+.chat-window {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 10px;
+  height: 300px;
+  overflow-y: auto;
+}
+.chat-input {
+  display: flex;
+  margin-top: 10px;
+}
+.chat-input input {
+  flex: 1;
   padding: 8px 12px;
   border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.4);
-  width: 250px;
 }
-.chat-box button {
+.chat-input button {
   padding: 8px 14px;
   border: none;
   border-radius: 6px;
@@ -52,10 +69,22 @@ h1, h2, h3, h4, p {
   color: #fff;
   cursor: pointer;
 }
-.chat-box button:hover {
+.chat-input button:hover {
   background: #45a049;
 }
-
+.message {
+  margin: 4px 0;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+.message.user {
+  background: rgba(255, 255, 255, 0.3);
+  align-self: flex-end;
+}
+.message.bot {
+  background: rgba(0, 0, 0, 0.3);
+  align-self: flex-start;
+}
 .hidden {
   opacity: 0;
   transform: scale(0.95);
