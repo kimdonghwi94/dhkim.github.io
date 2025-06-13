@@ -3,43 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <title>김동휘 포트폴리오</title>
-  <style>
-    body { font-family: sans-serif; text-align: center; margin-top: 50px; }
-    .menu a { margin: 0 20px; font-size: 18px; text-decoration: none; }
-    .chat-box { margin-top: 40px; }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>김동휘님의 홈페이지에 오신 걸 환영합니다</h1>
-  <p>필요하신 내용을 작성해주세요</p>
+  <h1 id="welcome"></h1>
+  <p id="instruction"></p>
 
-  <div class="menu">
+  <div class="menu hidden" id="menu">
     <a href="portfolio.html">📁 포트폴리오</a>
     <a href="resume.html">📄 이력서</a>
     <a href="stack.html">🛠️ 기술스택</a>
+    <a href="blog/index.html">📝 기술블로그</a>
   </div>
 
-  <div class="chat-box">
-    <input type="text" id="question" placeholder="궁금한 내용을 입력하세요" size="50">
+  <div class="chat-box hidden" id="question-box">
+    <input type="text" id="question" placeholder="궁금한 내용을 입력하세요">
     <button onclick="askChat()">질문하기</button>
   </div>
 
   <script>
-    async function askChat() {
-      const q = document.getElementById("question").value;
-      const res = await fetch("https://your-api-url.com/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: q })
-      });
-      const data = await res.json();
+    function typeText(el, text, speed, callback) {
+      let i = 0;
+      const timer = setInterval(() => {
+        el.textContent += text[i++];
+        if (i === text.length) {
+          clearInterval(timer);
+          if (callback) callback();
+        }
+      }, speed);
+    }
 
-      // 예: data = { answer: "이동합니다", url: "/resume.html" }
-      if (data.url) {
-        window.location.href = data.url;
+    window.addEventListener('DOMContentLoaded', () => {
+      const welcome = document.getElementById('welcome');
+      const instruction = document.getElementById('instruction');
+      typeText(welcome, '김동휘님의 홈페이지에 오신 걸 환영합니다', 100, () => {
+        typeText(instruction, '필요하신 내용을 작성해주세요', 100, () => {
+          document.getElementById('menu').classList.add('show');
+          document.getElementById('question-box').classList.add('show');
+        });
+      });
+    });
+
+    function askChat() {
+      const q = document.getElementById("question").value.toLowerCase();
+      if (q.includes("포트폴리오") || q.includes("portfolio")) {
+        window.location.href = "portfolio.html";
+      } else if (q.includes("이력서") || q.includes("resume")) {
+        window.location.href = "resume.html";
+      } else if (q.includes("기술스택") || q.includes("stack")) {
+        window.location.href = "stack.html";
+      } else if (q.includes("블로그") || q.includes("blog")) {
+        window.location.href = "blog/index.html";
       } else {
-        alert(data.answer || "응답이 없습니다.");
+        alert("죄송해요, 해당 내용을 찾을 수 없어요. 메뉴를 참고해주세요.");
       }
     }
   </script>
